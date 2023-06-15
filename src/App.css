@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+
+@media (max-width: 600px) {
+  /* Styles for screens with a maximum width of 600px */
+  .navbar {
+    flex-direction: column;
+  }
+  .navbar-item {
+    margin-bottom: 10px;
+  }
+}
+
+
+
+@media (min-width: 601px) {
+  /* Styles for screens with a minimum width of 601px */
+  .navbar {
+    flex-direction: row;
+  }
+  .navbar-item {
+    margin-right: 10px;
+  }
+}
