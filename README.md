@@ -64,6 +64,7 @@ bunları ayrı grid’lere ayırdım.
     * React
     * Material UI
     * DevExtreme
+    * React Icons
 
 
  
