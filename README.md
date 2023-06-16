@@ -1,6 +1,6 @@
 
 
-###Rast Mobile DataGrid Task
+### Rast Mobile DataGrid Task
 Projenin amacı kullanıcıların sosyal medya hesaplarının kayıt edilerek, sosyal medya linkine, sosyal medya adına ve açıklamalarına göre listelenmesi.
 
 ##### Proje Görselleri
@@ -9,12 +9,12 @@ Projenin amacı kullanıcıların sosyal medya hesaplarının kayıt edilerek, s
 ![Proje ekran görüntüsü](/screenshots/Rast-2.jpg)
 
 
-#####Projeyi bilgisayarınızda çalıştırmak için önkoşullar
+##### Projeyi bilgisayarınızda çalıştırmak için önkoşullar
 Bu projeyi çalıştırmak için, bilgisayarınızda şu yazılımların yüklü olduğundan emin olun:
 
 Node.js NPM veya Yarn
 
-#####Kurulum
+##### Kurulum
 * Bu projeyi klonlayın:
 
         git clone https://github.com/sertacgltkn/rast-task.git
@@ -36,7 +36,7 @@ cd rast-task
 adresine giderek uygulamayı görüntüleyin.
 
 
-#####Yapım Aşamaları
+##### Yapım Aşamaları
 
 •	Figma tasarımında ilk olarak kaç adet yapımızın bulunduğuna bakılıp ona göre bir grid yapısı oluşturulması gerektiğine bakıldı.
 •	4 adet yapı olduğuna karar verip 
@@ -60,7 +60,7 @@ bunları ayrı grid’lere ayırdım.
 
 
 
-#####Kullanılan NPM'ler
+##### Kullanılan NPM'ler
     * React
     * Material UI
     * DevExtreme
