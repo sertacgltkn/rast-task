@@ -1,70 +1,69 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+###Rast Mobile DataGrid Task
+Projenin amacı kullanıcıların sosyal medya hesaplarının kayıt edilerek, sosyal medya linkine, sosyal medya adına ve açıklamalarına göre listelenmesi.
 
-In the project directory, you can run:
+##### Proje Görselleri
 
-### `npm start`
+![Proje ekran görüntüsü](/screenshots/Rast-1.jpg)
+![Proje ekran görüntüsü](/screenshots/Rast-2.jpg)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#####Projeyi bilgisayarınızda çalıştırmak için önkoşullar
+Bu projeyi çalıştırmak için, bilgisayarınızda şu yazılımların yüklü olduğundan emin olun:
 
-### `npm test`
+Node.js NPM veya Yarn
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#####Kurulum
+* Bu projeyi klonlayın:
 
-### `npm run build`
+        git clone https://github.com/sertacgltkn/rast-task.git
+* Proje dizinine gidin:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+cd rast-task
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* Gerekli paketleri yükleyin:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+        npm install veya yarn install
+* Proje dizininde, aşağıdaki komutu çalıştırarak projeyi başlatın:
 
-### `npm run eject`
+        npm start veya yarn start
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* Tarayıcınızda 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+            http://localhost:3000 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+adresine giderek uygulamayı görüntüleyin.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+#####Yapım Aşamaları
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+•	Figma tasarımında ilk olarak kaç adet yapımızın bulunduğuna bakılıp ona göre bir grid yapısı oluşturulması gerektiğine bakıldı.
+•	4 adet yapı olduğuna karar verip 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    * Navbar, 
+    * Search Input ve Yeni Hesap Ekle,
+    * Tablo, 
+    * Rows ve sayfalama sayısı  
 
-### Code Splitting
+bunları ayrı grid’lere ayırdım.
+•	Navbar içerisindeki item’ları space-between özelliği ileayırdım.
+•	Yine aynı şekilde Search Input ve Yeni Hesap Ekle buttonlarını ayırmak ve eşit mesafe bırakmak için display:flex ve jc:space-between style özelliklerini kullandım.
+•	DataGrid yapısında kütüphane install edilip import’u yapıldıktan sonra dummy bir data’yı başlık olarak kullandım. Daha sonra modal içerisinden eklenecek olan data’lar için DataGrid’in props’larından faydalandım.
+•	Sayfada kaç satırın gösterileceği özellik eklendi bunun karşıtlığında kaçıncı sayfada olunduğunu gösteren özellik eklendi.
+•	Daha sonra Modal eklenerek input içerisine girilen değerin DataGrid’e girdi olarak eklenmesi sağlandı.
+•	Kullanıcının girdileri local’de kayıtlı kalması için localStorage’de tutulması sağlandı.
+•	Component’lerin responsive olması için çalışıldı.
+•	Yorum satırları eklendi.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![Proje ekran görüntüsü](/Rast-Task.jpg)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+#####Kullanılan NPM'ler
+    * React
+    * Material UI
+    * DevExtreme
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ 

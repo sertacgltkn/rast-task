@@ -1,6 +1,6 @@
 import { Grid, IconButton, Modal, TextField, Button } from "@material-ui/core";
 
-const NewAccountModal = ({ open, onClose, onSave }) => {
+const NewAccountModal = ({ open, onClose, onSave }) => {    // propslar yollandı.
   const handleModalClose = () => {
     onClose();
   };

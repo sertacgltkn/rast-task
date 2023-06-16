@@ -25,7 +25,7 @@ function App() {
   const [searchValue, setSearchValue] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rowsShown, setRowsShown] = useState(4);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage] = useState(1);
   const [informationData, setInformationData] = useState([
     {
       "Sosyal Medya Linki": "",
@@ -39,7 +39,7 @@ function App() {
     setInformationData(savedData);
   }, []);
 
-  const handleSearchChange = (event) => {
+  const handleSearchChange = (event) => {   //search inputunun içerisindeki yazılanlar alınır, boş durumda iken local'den ekli olanlar alınır.
     setSearchValue(event.target.value);
     if (event.target.value === "") {
       const savedData =
@@ -48,7 +48,7 @@ function App() {
     }
   };
 
-  const handleSearchClick = () => {
+  const handleSearchClick = () => {     // girdiler içerisinde arama yapabilmek için JS metodları ile fonksiyon yazıldı.
     const filteredData = informationData.filter((data) =>
       Object.values(data)
         .join(" ")
@@ -59,40 +59,40 @@ function App() {
     setInformationData(filteredData);
   };
 
-  const handleSortClick = () => {
+  const handleSortClick = () => {   // sosyal medya adına göre sıralama filtreleme butonuna eklendi.
     const sortedData = [...informationData].sort((a, b) =>
       a["Sosyal Medya Adı"].localeCompare(b["Sosyal Medya Adı"])
     );
     setInformationData(sortedData);
   };
 
-  const handleAddAccountClick = () => {
+  const handleAddAccountClick = () => {  //modal'i aç
     setIsModalOpen(true);
   };
 
-  const handleModalClose = () => {
+  const handleModalClose = () => {   // modal'i kapat
     setIsModalOpen(false);
   };
 
   const handleModalSave = () => {
     const newAccount = {
-      "Sosyal Medya Linki": document.getElementById("SosyalMedyaLinki").value,
-      "Sosyal Medya Adı": document.getElementById("SosyalMedyaAdi").value,
-      Açıklama: document.getElementById("Aciklama").value,
+      "Sosyal Medya Linki": document.getElementById("SosyalMedyaLinki").value,  // newAccountModal içerisindeki inputlar id ile yakalandı.
+      "Sosyal Medya Adı": document.getElementById("SosyalMedyaAdi").value,    // newAccountModal içerisindeki inputlar id ile yakalandı.
+      Açıklama: document.getElementById("Aciklama").value,    // newAccountModal içerisindeki inputlar id ile yakalandı.
     };
-    setInformationData([...informationData, newAccount]);
+    setInformationData([...informationData, newAccount]);   // Alınan girdiler state'e eklendi.
     setIsModalOpen(false);
 
-    const savedData = JSON.parse(localStorage.getItem("informationData")) || [];
+    const savedData = JSON.parse(localStorage.getItem("informationData")) || [];  // Girdiler localStorage'de saklandı.
     savedData.push(newAccount);
     localStorage.setItem("informationData", JSON.stringify(savedData));
   };
 
-  const handleRowsUp = () => {
+  const handleRowsUp = () => {    // satır sayısını güncelleme
     setRowsShown(Math.min(rowsShown + 1, 24));
   };
 
-  const handleRowsDown = () => {
+  const handleRowsDown = () => { // satır sayısını güncelleme
     setRowsShown(Math.max(rowsShown - 1, 4));
   };
 
@@ -265,8 +265,8 @@ function App() {
           </Grid>
         </Grid>
       </Grid>
-      <NewAccountModal
-        open={isModalOpen}
+      <NewAccountModal  
+        open={isModalOpen}    // propslar alındı.
         onClose={handleModalClose}
         onSave={handleModalSave}
       />
