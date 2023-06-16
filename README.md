@@ -24,7 +24,7 @@ cd rast-task
 
 * Gerekli paketleri yükleyin:
 
-        npm install --force 
+       <span style="color:red">npm install --force</span>
 * Proje dizininde, aşağıdaki komutu çalıştırarak projeyi başlatın:
 
         npm start veya yarn start
