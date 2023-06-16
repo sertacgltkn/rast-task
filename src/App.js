@@ -18,8 +18,8 @@ import {
   Typography,
   IconButton,
 } from "@material-ui/core";
-import Navbar from "./components/Navbar";
-import NewAccountModal from "./components/NewAccountModal";
+import Navbar from "./components/Navbar/Navbar";
+import NewAccountModal from "./components/NewAccountModal/NewAccountModal";
 
 function App() {
   const [searchValue, setSearchValue] = useState("");
@@ -231,7 +231,7 @@ function App() {
               <Grid container direction="column" alignItems="center">
                 <Grid item>
                   <IconButton onClick={handleRowsUp} disabled={rowsShown === 1}>
-                    <FiChevronUp style={{ color: "#744BFC" }}/>
+                    <FiChevronUp style={{ color: "#744BFC" }} />
                   </IconButton>
                 </Grid>
                 <Grid item>
@@ -239,7 +239,7 @@ function App() {
                     onClick={handleRowsDown}
                     disabled={rowsShown === 15}
                   >
-                    <FiChevronDown style={{ color: "#744BFC" }}/>
+                    <FiChevronDown style={{ color: "#744BFC" }} />
                   </IconButton>
                 </Grid>
               </Grid>
@@ -253,15 +253,13 @@ function App() {
               }}
             >
               <IconButton>
-                <FiChevronLeft style={{ color: "#744BFC" }}/>
+                <FiChevronLeft style={{ color: "#744BFC" }} />
               </IconButton>
               <Typography style={{ color: "black" }}>Page</Typography>
-              <Typography >
-                {currentPage} of
-              </Typography>
-              <Typography >1</Typography>
+              <Typography>{currentPage} of</Typography>
+              <Typography>1</Typography>
               <IconButton>
-                <FiChevronRight style={{ color: "#744BFC" }}/>
+                <FiChevronRight style={{ color: "#744BFC" }} />
               </IconButton>
             </Grid>
           </Grid>
