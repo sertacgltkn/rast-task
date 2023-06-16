@@ -12,7 +12,7 @@ Projenin amacı kullanıcıların sosyal medya hesaplarının kayıt edilerek, s
 ##### Projeyi bilgisayarınızda çalıştırmak için önkoşullar
 Bu projeyi çalıştırmak için, bilgisayarınızda şu yazılımların yüklü olduğundan emin olun:
 
-Node.js NPM veya Yarn
+Node.js NPM
 
 ##### Kurulum
 * Bu projeyi klonlayın:
@@ -24,7 +24,7 @@ cd rast-task
 
 * Gerekli paketleri yükleyin:
 
-        npm install veya yarn install
+        npm install --force 
 * Proje dizininde, aşağıdaki komutu çalıştırarak projeyi başlatın:
 
         npm start veya yarn start
