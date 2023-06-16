@@ -1,0 +1,19 @@
+.social-icon {
+  width: 20px;
+  height: 20px;
+  color: #744bfc;
+  padding: 0 10px;
+}
+
+.logo {
+  padding: 15px;
+  margin: 15px;
+  width: 10%;
+  cursor: pointer;
+}
+
+.navigation{
+  gap: 60px;
+  cursor: pointer;
+
+}

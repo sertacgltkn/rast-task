@@ -1,34 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "devextreme-react";
 import "devextreme/dist/css/dx.common.css";
 import "devextreme/dist/css/dx.light.css";
 import {
-  AiOutlineYoutube,
-  AiOutlineInstagram,
-  AiFillLinkedin,
-  AiOutlineBehance,
-} from "react-icons/ai";
-import { FiFilter, FiChevronDown, FiChevronUp } from "react-icons/fi";
+  FiFilter,
+  FiChevronDown,
+  FiChevronUp,
+  FiChevronLeft,
+  FiChevronRight,
+} from "react-icons/fi";
 import { CiSearch } from "react-icons/ci";
+import { FaPlus } from "react-icons/fa";
 import {
-  Modal,
   Button,
   TextField,
   Grid,
   Typography,
   IconButton,
 } from "@material-ui/core";
-import { useEffect } from "react";
+import Navbar from "./components/Navbar";
+import NewAccountModal from "./components/NewAccountModal";
 
 function App() {
   const [searchValue, setSearchValue] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rowsShown, setRowsShown] = useState(4);
+  const [currentPage, setCurrentPage] = useState(1);
   const [informationData, setInformationData] = useState([
     {
-      "Sosyal Medya Linki": "instagram/sertacgltkn",
-      "Sosyal Medya Adı": "Instagram",
-      Açıklama: "Succesfully",
+      "Sosyal Medya Linki": "",
+      "Sosyal Medya Adı": "",
+      Açıklama: "",
     },
   ]);
 
@@ -39,11 +41,30 @@ function App() {
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
+    if (event.target.value === "") {
+      const savedData =
+        JSON.parse(localStorage.getItem("informationData")) || [];
+      setInformationData(savedData);
+    }
   };
 
-  const handleSearchClick = () => {};
+  const handleSearchClick = () => {
+    const filteredData = informationData.filter((data) =>
+      Object.values(data)
+        .join(" ")
+        .toLowerCase()
+        .includes(searchValue.toLowerCase())
+    );
+    setRowsShown(Math.min(filteredData.length, 24));
+    setInformationData(filteredData);
+  };
 
-  const handleSortClick = () => {};
+  const handleSortClick = () => {
+    const sortedData = [...informationData].sort((a, b) =>
+      a["Sosyal Medya Adı"].localeCompare(b["Sosyal Medya Adı"])
+    );
+    setInformationData(sortedData);
+  };
 
   const handleAddAccountClick = () => {
     setIsModalOpen(true);
@@ -77,250 +98,180 @@ function App() {
 
   return (
     <Grid container direction="column" style={{ height: "100%" }}>
-      <Grid item style={{ backgroundColor: "white", padding: "10px" }}>
-        <Grid container justifyContent="space-between" alignItems="center">
-          <Grid item>
-            <img
-              src="/assets/rast-mobile.svg"
-              alt="Rast Mobile"
-              style={{ width: "124.27px", height: "36.7px" }}
-            />
-          </Grid>
-          <Grid item>
-            <Grid
-              container
-              justifyContent="center"
-              style={{ marginTop: "15px" }}
-            >
-              <Grid
-                item
-                className="text-bar"
-                style={{ display: "flex", alignItems: "center", gap: "250px" }}
-              >
-                <Typography style={{ marginRight: "10px" }}>
-                  Hakkımızda
-                </Typography>
-                <Typography style={{ marginRight: "10px" }}>
-                  Jüri-Yarışma Yazılımı
-                </Typography>
-                <Typography style={{ marginRight: "10px" }}>
-                  Word Ninja
-                </Typography>
-                <Typography style={{ marginRight: "80px" }}>
-                  Word Pyramids
-                </Typography>
-              </Grid>
-              <Grid item style={{ display: "flex" }}>
-                <Typography style={{ padding: "0 10px" }}>
-                  <AiOutlineYoutube
-                    style={{ width: "20px", height: "20px", color: "#744BFC" }}
-                  />
-                </Typography>
-                <Typography style={{ padding: "0 10px" }}>
-                  <AiOutlineInstagram
-                    style={{ width: "20px", height: "20px", color: "#744BFC" }}
-                  />
-                </Typography>
-                <Typography style={{ padding: "0 10px" }}>
-                  <AiFillLinkedin
-                    style={{ width: "20px", height: "20px", color: "#744BFC" }}
-                  />
-                </Typography>
-                <Typography style={{ padding: "0 10px" }}>
-                  <AiOutlineBehance
-                    style={{ width: "20px", height: "20px", color: "#744BFC" }}
-                  />
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
+      <Grid style={{ backgroundColor: "white", padding: "10px" }}>
+        <Navbar />
       </Grid>
-      <Grid item>
+      <Grid item style={{ backgroundColor: "#F5F7FF", padding: "10px" }}>
         <Grid
           container
           justifyContent="space-between"
+          alignItems="center"
           style={{ padding: "10px" }}
         >
           <Grid item>
-            <Grid container alignItems="center">
-              <Grid item>
-                <TextField
-                  type="text"
-                  placeholder="Search"
-                  variant="outlined"
-                  value={searchValue}
-                  onChange={handleSearchChange}
-                  sx={{
-                    borderRadius: "5px",
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: "5px",
-                    },
-                  }}
-                ></TextField>
-              </Grid>
-              <Grid item>
-                <Button
-                  placeholder="Search objects..."
-                  variant="contained"
-                  color="primary"
-                  onClick={handleSearchClick}
-                  style={{ backgroundColor: "#744BFC" }}
-                >
-                  <CiSearch />
-                </Button>
-              </Grid>
-              <Grid item>
-                <FiFilter onClick={handleSortClick} />
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Button
-              color="primary"
-              variant="contained"
-              onClick={handleAddAccountClick}
+            <Grid
+              item
               style={{
-                marginLeft: "10px",
-                backgroundColor: "#744BFC",
-                textTransform: "none",
+                width: "100%",
+                display: "flex",
+                justifyContent: "flex-end",
+                padding: "10px",
+                margin: "15px",
               }}
             >
-              + Yeni Hesap Ekle
-            </Button>
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid
-        item
-        style={{
-          flex: "1",
-          display: "flex",
-          width: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-        }}
-      >
-        <DataGrid
-          dataSource={informationData}
-          showBorders={true}
-          remoteOperations={true}
-          columnAutoWidth={true}
-          hoverStateEnabled={true}
-        />
-        <Grid item style={{ marginTop: "10px" }}>
-          <Typography variant="body1">
-            Show: {informationData.length} rows
-          </Typography>
-          <Grid container>
-            <Grid item>
-              <IconButton onClick={handleRowsUp} disabled={rowsShown === 1}>
-                <FiChevronUp />
-              </IconButton>
+              <TextField
+                type="text"
+                placeholder="Search objects..."
+                variant="outlined"
+                value={searchValue}
+                onChange={handleSearchChange}
+                InputProps={{
+                  style: {
+                    borderRadius: "38px",
+                    width: "25rem",
+                    paddingRight: "0",
+                    backgroundColor: "#ffff",
+                    height: "42px",
+                  },
+                }}
+              />
+              <Button
+                placeholder="Search objects..."
+                variant="contained"
+                color="primary"
+                onClick={handleSearchClick}
+                style={{
+                  backgroundColor: "#744BFC",
+                  marginLeft: "-40px",
+                  borderBottomRightRadius: "30px",
+                  borderTopRightRadius: "30px",
+                  height: "42px",
+                }}
+              >
+                <CiSearch size={"30px"} />
+              </Button>
+              <Button
+                color="primary"
+                style={{
+                  color: "#744BFC",
+                  backgroundColor: "#ffff",
+                  borderRadius: "50%",
+                }}
+              >
+                <FiFilter size={"30px"} onClick={handleSortClick} />
+              </Button>
             </Grid>
-            <Grid item>
-              <IconButton onClick={handleRowsDown} disabled={rowsShown === 15}>
-                <FiChevronDown />
-              </IconButton>
-            </Grid>
           </Grid>
+
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={handleAddAccountClick}
+            style={{
+              marginLeft: "10px",
+              backgroundColor: "#744BFC",
+              borderRadius: "39px",
+              textTransform: "none",
+              width: "175px",
+              height: "42px",
+              padding: "10px",
+            }}
+          >
+            <FaPlus size={"18px"} style={{ marginRight: "15px" }} /> Yeni Hesap
+            Ekle
+          </Button>
         </Grid>
-      </Grid>
-      <Modal open={isModalOpen} onClose={handleModalClose}>
+
         <Grid
+          item
           style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "488px",
-            height: "406px",
-            backgroundColor: "white",
-            boxShadow: 24,
-            p: 4,
-            borderRadius: "13px",
-            maxWidth: "600px",
+            flex: "1",
+            display: "flex",
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+            padding: "25px",
           }}
         >
-          <Grid container justifyContent="flex-end">
-            <IconButton onClick={handleModalClose}>X</IconButton>
-          </Grid>
+          <DataGrid
+            dataSource={informationData}
+            showBorders={true}
+            remoteOperations={true}
+            columnAutoWidth={true}
+            hoverStateEnabled={true}
+            rowAlternationEnabled={true}
+            rowAlternationCount={1}
+            rowAlternationColor="red"
+            rowAlternationInterval={2}
+          />
           <Grid
             container
-            spacing={2}
-            direction="column"
-            style={{ alignItems: "center", justifyContent: "center" }}
+            alignItems="center"
+            justifyContent="flex-start"
+            item
+            style={{ marginTop: "10px" }}
           >
-            <Grid item>
-              <TextField
-                variant="outlined"
-                id="SosyalMedyaLinki"
-                label="Sosyal Medya Linki"
-                InputProps={{
-                  style: {
-                    borderRadius: "38px",
-                  },
-                }}
-              />
-            </Grid>
+            <Typography style={{ color: "#744BFC" }}>Show:</Typography>
 
-            <Grid item>
-              <TextField
-                variant="outlined"
-                id="SosyalMedyaAdi"
-                label="Sosyal Medya Adı"
-                InputProps={{
-                  style: {
-                    borderRadius: "38px",
-                  },
-                }}
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                variant="outlined"
-                id="Aciklama"
-                label="Açıklama"
-                InputProps={{
-                  style: {
-                    borderRadius: "38px",
-                  },
-                }}
-              />
-            </Grid>
-          </Grid>
-          <Grid container justifyContent="flex-end">
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleModalClose}
+            <Grid
+              item
               style={{
-                marginRight: "10px",
-                backgroundColor: "#F5F7FF",
-
-                color: "#744BFC",
-                borderRadius: "34px",
-                textTransform: "none",
+                backgroundColor: "#ffff",
+                borderRadius: "39px",
+                border: " 1px solid #CFC0FF",
+                width: "5%",
+                margin: "15px",
+                padding: "5px",
               }}
             >
-              Vazgeç
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleModalSave}
+              <Typography>{informationData.length} rows</Typography>
+            </Grid>
+            <Grid item>
+              <Grid container direction="column" alignItems="center">
+                <Grid item>
+                  <IconButton onClick={handleRowsUp} disabled={rowsShown === 1}>
+                    <FiChevronUp style={{ color: "#744BFC" }}/>
+                  </IconButton>
+                </Grid>
+                <Grid item>
+                  <IconButton
+                    onClick={handleRowsDown}
+                    disabled={rowsShown === 15}
+                  >
+                    <FiChevronDown style={{ color: "#744BFC" }}/>
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid
+              container
               style={{
-                backgroundColor: "#744BFC",
-                borderRadius: "34px",
-                textTransform: "none",
+                justifyContent: "flex-end",
+                alignItems: "center",
+                padding: "10px",
               }}
             >
-              Kaydet
-            </Button>
+              <IconButton>
+                <FiChevronLeft style={{ color: "#744BFC" }}/>
+              </IconButton>
+              <Typography style={{ color: "black" }}>Page</Typography>
+              <Typography >
+                {currentPage} of
+              </Typography>
+              <Typography >1</Typography>
+              <IconButton>
+                <FiChevronRight style={{ color: "#744BFC" }}/>
+              </IconButton>
+            </Grid>
           </Grid>
         </Grid>
-      </Modal>
+      </Grid>
+      <NewAccountModal
+        open={isModalOpen}
+        onClose={handleModalClose}
+        onSave={handleModalSave}
+      />
     </Grid>
   );
 }
