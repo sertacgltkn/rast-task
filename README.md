@@ -22,7 +22,7 @@ Node.js NPM
 
 cd rast-task
 
-* Gerekli paketleri yükleyin:      <<<<<<<<<<<< UYARI >>>>>>>>>>>>  "npm install sadece --force flag'iyle çalışıyor  <<<<<<<<<<<<
+* Gerekli paketleri yükleyin:      <<<<<<<<<<<< UYARI >>>>>>>>>>>>  "npm install sadece --force flag'iyle çalışıyor"  <<<<<<<<<<<<
 
         npm install --force
 * Proje dizininde, aşağıdaki komutu çalıştırarak projeyi başlatın:
