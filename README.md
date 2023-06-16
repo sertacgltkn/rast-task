@@ -56,7 +56,7 @@ bunları ayrı grid’lere ayırdım.
 •	Component’lerin responsive olması için çalışıldı.
 •	Yorum satırları eklendi.
 
-![Proje ekran görüntüsü](/Rast-Task.jpg)
+![Proje ekran görüntüsü](/screenshots/Rast-Task.jpg)
 
 
 
